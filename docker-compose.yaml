@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda
+    command: start --overprovisioned --smp 1 --memory 1G
+    ports:
+      - "9092:9092"
+
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redpanda
